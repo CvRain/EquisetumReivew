@@ -4,63 +4,120 @@ import QtQuick.Shapes
 
 Item {
     id: item_root
-    property double slideIconHeight: 180
-    property double slideIconWidth: 40
-    property double iconWidth: slideIconWidth * 0.9
-    property string backgroundColor: "#e0f0e9"
+    property double slide_icon_height: 180
+    property double slide_icon_width: 40
+    property double icon_width: slide_icon_width * 0.9
+    property string background_color: "#e0f0e9"
 
-    width: slideIconWidth
-    height: slideIconHeight
+    width: slide_icon_width
+    height: slide_icon_height
 
     signal button_home_clicked
-    signal button_list_clicked
+    signal button_book_clicked
     signal button_todo_clicked
     signal button_note_clicked
     signal button_menu_clicked
 
     Rectangle {
         id: rectangle_root
-        width: slideIconWidth
-        height: slideIconHeight - menu_button.height
+        width: slide_icon_width
+        height: slide_icon_height - menu_button.height
         anchors.fill: parent
 
-        color: backgroundColor
+        color: background_color
 
         ListView {
             id: icon_list
-            width: slideIconWidth
+            width: slide_icon_width
             height: parent.height
             anchors.fill: parent
+            anchors.top: parent.top
+            anchors.topMargin: icon_width / 2
+            model: iconModel
+            delegate: iconComponent
+        }
+
+        ListModel {
+            id: iconModel
+            ListElement {
+                imgSource: "qrc:/img/home.svg"
+                elementName: "home"
+            }
+            ListElement {
+                imgSource: "qrc:/img/carry out.svg"
+                elementName: "todo"
+            }
+            ListElement {
+                imgSource: "qrc:/img/edit-square.svg"
+                elementName: "note"
+            }
+            ListElement {
+                imgSource: "qrc:/img/book.svg"
+                elementName: "book"
+            }
+        }
+
+        Component {
+            id: iconComponent
+            Rectangle {
+                width: parent.width
+                height: parent.width
+                color: background_color
+                MenuButton {
+                    id: menu_button
+                    widgetWidth: parent.width
+                    iconWidth: icon_width
+                    backgroundColor: background_color
+                    imgPath: imgSource
+                }
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: {
+                        sendElementSignal(elementName)
+                    }
+                }
+            }
         }
     }
     Rectangle {
-        id: menu_button
         width: parent.width
         height: parent.width
-        color: backgroundColor
         anchors.left: parent.left
         anchors.bottom: parent.bottom
-
-        Shape {
+        MenuButton {
+            id: menu_button
+            widgetWidth: parent.width
+            iconWidth: icon_width
+            backgroundColor: background_color
+            imgPath: "qrc:/img/indent.svg"
+        }
+        MouseArea {
             anchors.fill: parent
-            ShapePath {
-                strokeWidth: 4
-                strokeColor: Qt.lighter(backgroundColor, 1.1)
-                strokeStyle: ShapePath.SolidLine
-                startX: 0
-                startY: 0
-                PathLine {
-                    x: menu_button.width
-                    y: 0
-                }
+            onClicked: {
+                item_root.button_menu_clicked()
+                console.log("indent clicked")
             }
-            Image {
-                id: img_menu
-                source: "qrc:/img/file.svg"
-                width: iconWidth
-                height: iconWidth
-                anchors.centerIn: parent
-            }
+        }
+    }
+
+    function sendElementSignal(elementName) {
+        switch (elementName) {
+        case "home":
+            item_root.button_home_clicked()
+            console.log("home clicked")
+            break
+        case "todo":
+            item_root.button_todo_clicked()
+            console.log("todo clicked")
+            break
+        case "note":
+            item_root.button_note_clicked()
+            console.log("note clicked")
+            break
+        case "book":
+            item_root.button_book_clicked()
+            console.log("book clicked")
+            break
         }
     }
 }
