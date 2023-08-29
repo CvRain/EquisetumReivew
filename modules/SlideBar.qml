@@ -29,7 +29,6 @@ Item {
             onButton_menu_clicked: {
                 slideContext.visible = !slideContext.visible
             }
-        }
 
         SlideContext {
             id: slideContext
@@ -40,4 +39,5 @@ Item {
             background_color: item_root.background_color
         }
     }
+}
 }

@@ -4,6 +4,7 @@ project(EquisetumReivew VERSION 0.1 LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_PREFIX_PATH /usr)
 
 find_package(Qt6 6.5 REQUIRED COMPONENTS Quick)
 
@@ -41,8 +42,12 @@ set_target_properties(appEquisetumReivew PROPERTIES
     WIN32_EXECUTABLE TRUE
 )
 
+find_package(unofficial-sqlite3 CONFIG REQUIRED)
+find_package(SQLiteCpp CONFIG REQUIRED)
+find_package(loguru CONFIG REQUIRED)
+
 target_link_libraries(appEquisetumReivew
-    PRIVATE Qt6::Quick
+    PRIVATE Qt6::Quick  unofficial::sqlite3::sqlite3 SQLiteCpp loguru
 )
 
 include(GNUInstallDirs)

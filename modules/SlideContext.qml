@@ -5,7 +5,6 @@ Item {
     property double widget_width
     property double widget_height
     property color background_color: "white"
-    property var context_page: item_main
     property var context_list_view: listView
 
     id: item_root
