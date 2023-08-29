@@ -6,7 +6,6 @@ Item {
     id: item_root
     property double slide_icon_height: 180
     property double slide_icon_width: 40
-    property double icon_width: slide_icon_width * 0.9
     property string background_color: "#e0f0e9"
 
     width: slide_icon_width
@@ -32,7 +31,7 @@ Item {
             height: parent.height
             anchors.fill: parent
             anchors.top: parent.top
-            anchors.topMargin: icon_width / 2
+            anchors.topMargin: indent_button.width / 2
             model: iconModel
             delegate: iconComponent
         }
@@ -66,7 +65,7 @@ Item {
                 MenuButton {
                     id: menu_button
                     widgetWidth: parent.width
-                    iconWidth: icon_width
+                    iconWidth: parent.width * 0.65
                     backgroundColor: background_color
                     imgPath: imgSource
                 }
@@ -80,6 +79,7 @@ Item {
         }
     }
     Rectangle {
+        id: indent_button
         width: parent.width
         height: parent.width
         anchors.left: parent.left
@@ -87,7 +87,7 @@ Item {
         MenuButton {
             id: menu_button
             widgetWidth: parent.width
-            iconWidth: icon_width
+            iconWidth: parent.width * 0.65
             backgroundColor: background_color
             imgPath: "qrc:/img/indent.svg"
         }

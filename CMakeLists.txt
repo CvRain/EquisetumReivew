@@ -11,7 +11,10 @@ qt_standard_project_setup(REQUIRES 6.5)
 
 set(QML_MODULE  modules/Main.qml
                 modules/SlideIcon.qml
-            modules/MenuButton.qml)
+                modules/MenuButton.qml
+                modules/SlideBar.qml
+                modules/SlideContext.qml
+            )
 set(SRC src/main.cpp)
 
 qt6_add_resources(QRC_FILES res/resource.qrc)
@@ -25,7 +28,6 @@ qt_add_qml_module(appEquisetumReivew
     VERSION 1.0
     QML_FILES ${QML_MODULE}
     RESOURCES res/resource.qrc
-
 )
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.
