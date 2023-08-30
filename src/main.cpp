@@ -1,7 +1,8 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
-#include <SQLiteCpp/SQLiteCpp.h>
 #include <loguru/loguru.hpp>
+
+#include "database_service.hpp"
 
 int main(int argc, char *argv[])
 {
@@ -14,8 +15,7 @@ int main(int argc, char *argv[])
         Qt::QueuedConnection);
     engine.loadFromModule("EquisetumReivew", "Main");
 
-    LOG_F(INFO, "sqlite3 version: %s(%s)", SQLite::VERSION, SQLite::getLibVersion());
-    LOG_F(INFO, "sqliteC++ Version: %s", SQLITECPP_VERSION);
+    const auto& databaseInstance =  DatabaseService::GetInstance();
 
-    return app.exec();
+    return QGuiApplication::exec();
 }

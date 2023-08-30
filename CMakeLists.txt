@@ -4,7 +4,7 @@ project(EquisetumReivew VERSION 0.1 LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_STANDARD 20)
-set(CMAKE_PREFIX_PATH /usr)
+set(CMAKE_PREFIX_PATH /home/cvrain/Qt/6.5.1/gcc_64)
 
 find_package(Qt6 6.5 REQUIRED COMPONENTS Quick)
 
@@ -16,7 +16,9 @@ set(QML_MODULE  modules/Main.qml
                 modules/SlideBar.qml
                 modules/SlideContext.qml
             )
-set(SRC src/main.cpp)
+set(SRC src/main.cpp
+        src/database_service.cpp
+        src/database_service.hpp)
 
 qt6_add_resources(QRC_FILES res/resource.qrc)
 
