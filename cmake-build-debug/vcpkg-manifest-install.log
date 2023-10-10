@@ -1,6 +1,6 @@
 Detecting compiler hash for triplet x64-linux...
 All requested packages are currently installed.
-Total install time: 361 ns
+Total install time: 321 ns
 jsoncpp provides CMake targets:
 
     # this is heuristically generated, and may not be correct

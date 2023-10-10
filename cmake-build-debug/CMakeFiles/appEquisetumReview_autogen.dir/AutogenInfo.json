@@ -872,6 +872,18 @@
 			null
 		],
 		[
+			"/mnt/Workspace/QtCreator/EquisetumReview/src/db_notice_operator.h",
+			"MU",
+			"UVLADIE3JM/moc_db_notice_operator.cpp",
+			null
+		],
+		[
+			"/mnt/Workspace/QtCreator/EquisetumReview/src/db_todo_operator.h",
+			"MU",
+			"UVLADIE3JM/moc_db_todo_operator.cpp",
+			null
+		],
+		[
 			"/mnt/Workspace/QtCreator/EquisetumReview/src/json_maker.h",
 			"MU",
 			"UVLADIE3JM/moc_json_maker.cpp",
@@ -975,6 +987,16 @@
 		],
 		[
 			"/mnt/Workspace/QtCreator/EquisetumReview/src/base_db_operator.cpp",
+			"MU",
+			null
+		],
+		[
+			"/mnt/Workspace/QtCreator/EquisetumReview/src/db_notice_operator.cpp",
+			"MU",
+			null
+		],
+		[
+			"/mnt/Workspace/QtCreator/EquisetumReview/src/db_todo_operator.cpp",
 			"MU",
 			null
 		],

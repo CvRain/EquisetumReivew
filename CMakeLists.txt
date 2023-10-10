@@ -24,7 +24,11 @@ set(SRC src/main.cpp
         src/json_maker.cpp
         src/json_maker.h
         src/base_db_operator.cpp
-        src/base_db_operator.h)
+        src/base_db_operator.h
+        src/db_notice_operator.cpp
+        src/db_notice_operator.h
+        src/db_todo_operator.cpp
+        src/db_todo_operator.h)
 
 qt_add_executable(appEquisetumReview
         ${SRC}
