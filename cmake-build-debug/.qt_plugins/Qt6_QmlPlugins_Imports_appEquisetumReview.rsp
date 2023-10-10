@@ -1,0 +1,14 @@
+-rootPath
+/mnt/Workspace/QtCreator/EquisetumReview
+-cmake-output
+-output-file
+/mnt/Workspace/QtCreator/EquisetumReview/cmake-build-debug/.qt_plugins/Qt6_QmlPlugins_Imports_appEquisetumReview.cmake
+-importPath
+/mnt/Workspace/QtCreator/EquisetumReview/cmake-build-debug/EquisetumReview
+-importPath
+/mnt/Workspace/QtCreator/EquisetumReview/cmake-build-debug
+-importPath
+/usr/lib/qt6/qml
+-qrcFiles
+/mnt/Workspace/QtCreator/EquisetumReview/cmake-build-debug/.rcc/qmake_EquisetumReview.qrc
+/mnt/Workspace/QtCreator/EquisetumReview/cmake-build-debug/.rcc/appEquisetumReview_raw_qml_0.qrc

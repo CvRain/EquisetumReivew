@@ -1,0 +1,11 @@
+<RCC>
+  <qresource prefix="/qt/qml/EquisetumReview/">
+    <file alias="modules/Main.qml">/mnt/Workspace/QtCreator/EquisetumReview/modules/Main.qml</file>
+    <file alias="modules/SlideIcon.qml">/mnt/Workspace/QtCreator/EquisetumReview/modules/SlideIcon.qml</file>
+    <file alias="modules/MenuButton.qml">/mnt/Workspace/QtCreator/EquisetumReview/modules/MenuButton.qml</file>
+    <file alias="modules/SlideBar.qml">/mnt/Workspace/QtCreator/EquisetumReview/modules/SlideBar.qml</file>
+    <file alias="modules/SlideContext.qml">/mnt/Workspace/QtCreator/EquisetumReview/modules/SlideContext.qml</file>
+    <file alias="/mnt/Workspace/QtCreator/EquisetumReview/cmake-build-debug/qrc_resource.cpp">/mnt/Workspace/QtCreator/EquisetumReview/cmake-build-debug/qrc_resource.cpp</file>
+  </qresource>
+</RCC>
+

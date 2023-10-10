@@ -1,0 +1,6 @@
+<RCC>
+  <qresource prefix="/qt/qml/EquisetumReview">
+    <file alias="qmldir">/mnt/Workspace/QtCreator/EquisetumReview/cmake-build-debug/EquisetumReview/qmldir</file>
+  </qresource>
+</RCC>
+

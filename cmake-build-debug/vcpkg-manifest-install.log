@@ -1,0 +1,21 @@
+Detecting compiler hash for triplet x64-linux...
+All requested packages are currently installed.
+Total install time: 361 ns
+jsoncpp provides CMake targets:
+
+    # this is heuristically generated, and may not be correct
+    find_package(jsoncpp CONFIG REQUIRED)
+    target_link_libraries(main PRIVATE JsonCpp::JsonCpp)
+
+leveldb provides CMake targets:
+
+    # this is heuristically generated, and may not be correct
+    find_package(leveldb CONFIG REQUIRED)
+    target_link_libraries(main PRIVATE leveldb::leveldb)
+
+loguru provides CMake targets:
+
+    # this is heuristically generated, and may not be correct
+    find_package(loguru CONFIG REQUIRED)
+    target_link_libraries(main PRIVATE loguru)
+

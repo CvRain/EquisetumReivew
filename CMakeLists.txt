@@ -1,70 +1,64 @@
-cmake_minimum_required(VERSION 3.5)
+cmake_minimum_required(VERSION 3.16)
 
 project(EquisetumReview VERSION 0.1 LANGUAGES CXX)
 
-set(CMAKE_AUTOUIC ON)
-set(CMAKE_AUTOMOC ON)
-set(CMAKE_AUTORCC ON)
-
-set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets)
-find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets)
+find_package(Qt6 6.5 REQUIRED COMPONENTS Quick)
+find_package(jsoncpp CONFIG REQUIRED)
+find_package(leveldb CONFIG REQUIRED)
+find_package(loguru CONFIG REQUIRED)
 
-set(PROJECT_SOURCES
-        main.cpp
-        main_window.cpp
-        main_window.hpp
-        main_window.ui
+qt_standard_project_setup(REQUIRES 6.5)
+
+set(QML_MODULE modules/Main.qml
+        modules/SlideIcon.qml
+        modules/MenuButton.qml
+        modules/SlideBar.qml
+        modules/SlideContext.qml
 )
 
-if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
-    qt_add_executable(EquisetumReview
-        MANUAL_FINALIZATION
-        ${PROJECT_SOURCES}
-    )
-# Define target properties for Android with Qt 6 as:
-#    set_property(TARGET EquisetumReview APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR
-#                 ${CMAKE_CURRENT_SOURCE_DIR}/android)
-# For more information, see https://doc.qt.io/qt-6/qt-add-executable.html#target-creation
-else()
-    if(ANDROID)
-        add_library(EquisetumReview SHARED
-            ${PROJECT_SOURCES}
-        )
-# Define properties for Android with Qt 5 after find_package() calls as:
-#    set(ANDROID_PACKAGE_SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/android")
-    else()
-        add_executable(EquisetumReview
-            ${PROJECT_SOURCES}
-        )
-    endif()
-endif()
+qt6_add_resources(QRC_FILES res/resource.qrc)
 
-target_link_libraries(EquisetumReview PRIVATE Qt${QT_VERSION_MAJOR}::Widgets)
+set(SRC src/main.cpp
+        src/json_maker.cpp
+        src/json_maker.h
+        src/base_db_operator.cpp
+        src/base_db_operator.h)
+
+qt_add_executable(appEquisetumReview
+        ${SRC}
+        ${QRC_FILES}
+)
+
+qt_add_qml_module(appEquisetumReview
+        URI EquisetumReview
+        VERSION 1.0
+        QML_FILES ${QML_MODULE}
+        RESOURCES ${QRC_FILES}
+)
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.
 # If you are developing for iOS or macOS you should consider setting an
 # explicit, fixed bundle identifier manually though.
-if(${QT_VERSION} VERSION_LESS 6.1.0)
-  set(BUNDLE_ID_OPTION MACOSX_BUNDLE_GUI_IDENTIFIER com.example.EquisetumReview)
-endif()
-set_target_properties(EquisetumReview PROPERTIES
-    ${BUNDLE_ID_OPTION}
+set_target_properties(appEquisetumReview PROPERTIES
+#    MACOSX_BUNDLE_GUI_IDENTIFIER com.example.appEquisetumReview
     MACOSX_BUNDLE_BUNDLE_VERSION ${PROJECT_VERSION}
     MACOSX_BUNDLE_SHORT_VERSION_STRING ${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}
     MACOSX_BUNDLE TRUE
     WIN32_EXECUTABLE TRUE
 )
 
+target_link_libraries(appEquisetumReview
+    PRIVATE Qt6::Quick
+)
+
 include(GNUInstallDirs)
-install(TARGETS EquisetumReview
+install(TARGETS ${RPOJECT_NAME}
     BUNDLE DESTINATION .
     LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
     RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
 )
 
-if(QT_VERSION_MAJOR EQUAL 6)
-    qt_finalize_executable(EquisetumReview)
-endif()
+target_link_libraries(appEquisetumReview PRIVATE JsonCpp::JsonCpp leveldb::leveldb loguru)
+target_compile_features(appEquisetumReview PRIVATE cxx_std_20)
