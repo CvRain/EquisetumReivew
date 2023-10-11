@@ -59,6 +59,8 @@ appEquisetumReview_autogen/timestamp: \
   /mnt/Workspace/QtCreator/EquisetumReview/src/db_notice_operator.h \
   /mnt/Workspace/QtCreator/EquisetumReview/src/db_todo_operator.cpp \
   /mnt/Workspace/QtCreator/EquisetumReview/src/db_todo_operator.h \
+  /mnt/Workspace/QtCreator/EquisetumReview/src/id_generator.cpp \
+  /mnt/Workspace/QtCreator/EquisetumReview/src/id_generator.h \
   /mnt/Workspace/QtCreator/EquisetumReview/src/json_maker.cpp \
   /mnt/Workspace/QtCreator/EquisetumReview/src/json_maker.h \
   /mnt/Workspace/QtCreator/EquisetumReview/src/main.cpp \

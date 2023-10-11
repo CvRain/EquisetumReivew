@@ -28,7 +28,9 @@ set(SRC src/main.cpp
         src/db_notice_operator.cpp
         src/db_notice_operator.h
         src/db_todo_operator.cpp
-        src/db_todo_operator.h)
+        src/db_todo_operator.h
+        src/id_generator.cpp
+        src/id_generator.h)
 
 qt_add_executable(appEquisetumReview
         ${SRC}

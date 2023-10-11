@@ -40,7 +40,7 @@ namespace DbOperator {
 
     class BaseOperator{
     public:
-        virtual leveldb::Status Create(const std::string_view& value) = 0;
+        virtual std::pair<leveldb::Status, const std::string_view> Create(const std::string_view& value) = 0;
         virtual leveldb::Status Retrieve(const std::string_view& key) = 0;
         virtual leveldb::Status Update(const std::string_view& key, const std::string_view& value) = 0;
         virtual leveldb::Status Delete(const std::string_view& key) = 0;

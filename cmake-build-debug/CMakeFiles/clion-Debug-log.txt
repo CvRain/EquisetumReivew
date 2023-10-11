@@ -2,7 +2,7 @@
 -- Running vcpkg install
 Detecting compiler hash for triplet x64-linux...
 All requested packages are currently installed.
-Total install time: 321 ns
+Total install time: 271 ns
 jsoncpp provides CMake targets:
 
     # this is heuristically generated, and may not be correct
@@ -22,6 +22,6 @@ loguru provides CMake targets:
     target_link_libraries(main PRIVATE loguru)
 
 -- Running vcpkg install - done
--- Configuring done (14.8s)
+-- Configuring done (2.2s)
 -- Generating done (0.0s)
 -- Build files have been written to: /mnt/Workspace/QtCreator/EquisetumReview/cmake-build-debug

@@ -12,7 +12,8 @@ int main(int argc, char *argv[])
     LOG_F(INFO,"QQmlApplicationEngine start");
 
     auto& notice_operator = DbOperator::DbNoticeOperator::GetInstance();
-    notice_operator.Create("Hello world!");
+    //const auto result = notice_operator.Create("Hello world!");
+    //LOG_F(INFO, "Create notice result: %s", result.second.data());
 
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreationFailed,
         &app, []() { QCoreApplication::exit(-1); },

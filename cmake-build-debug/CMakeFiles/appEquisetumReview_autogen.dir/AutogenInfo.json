@@ -884,6 +884,12 @@
 			null
 		],
 		[
+			"/mnt/Workspace/QtCreator/EquisetumReview/src/id_generator.h",
+			"MU",
+			"UVLADIE3JM/moc_id_generator.cpp",
+			null
+		],
+		[
 			"/mnt/Workspace/QtCreator/EquisetumReview/src/json_maker.h",
 			"MU",
 			"UVLADIE3JM/moc_json_maker.cpp",
@@ -997,6 +1003,11 @@
 		],
 		[
 			"/mnt/Workspace/QtCreator/EquisetumReview/src/db_todo_operator.cpp",
+			"MU",
+			null
+		],
+		[
+			"/mnt/Workspace/QtCreator/EquisetumReview/src/id_generator.cpp",
 			"MU",
 			null
 		],

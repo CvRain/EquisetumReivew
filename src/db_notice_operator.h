@@ -5,6 +5,7 @@
 #pragma once
 
 #include "base_db_operator.h"
+#include "id_generator.h"
 #include <filesystem>
 
 namespace DbOperator {
@@ -14,7 +15,7 @@ namespace DbOperator {
     public:
         static DbNoticeOperator& GetInstance();
 
-        leveldb::Status Create(const std::string_view &value) override;
+        std::pair<leveldb::Status, const std::string_view> Create(const std::string_view &value) override;
 
         leveldb::Status Retrieve(const std::string_view &key) override;
 

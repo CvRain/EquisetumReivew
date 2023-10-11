@@ -14,8 +14,10 @@ namespace DbOperator{
         return db_operator;
     }
 
-    leveldb::Status DbNoticeOperator::Create(const std::string_view &value) {
-        return leveldb::Status::OK();
+    std::pair<leveldb::Status, const std::string_view> DbNoticeOperator::Create(const std::string_view &value) {
+        auto uuid = IdGenerator::GenerateObjectId();
+        const auto status = db_operator.Put(uuid, value);
+        return std::make_pair(status.first, uuid);
     }
 
     leveldb::Status DbNoticeOperator::Retrieve(const std::string_view &key) {
