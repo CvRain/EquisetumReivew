@@ -21,7 +21,7 @@ namespace DbOperator {
         LOG_F(INFO, "Open level db: %s", db_path.string().data());
     }
 
-    void BaseDbOperator::Delete() {
+    void BaseDbOperator::RemoveDb() {
         delete db;
         db = nullptr;
         LOG_F(INFO, "Delete database successfully");
@@ -29,22 +29,22 @@ namespace DbOperator {
 
     BaseDbOperator::~BaseDbOperator() {
         if (db != nullptr) {
-            Delete();
+            RemoveDb();
         }
     }
 
-    BaseDbOperator::DbResult BaseDbOperator::Put(const std::string_view &key, const std::string_view &value) {
+    DbResult BaseDbOperator::Put(const std::string_view &key, const std::string_view &value) {
         const auto result = db->Put(leveldb::WriteOptions(), key.data(), value.data());
         return std::make_pair(result, value);
     }
 
-    BaseDbOperator::DbResult BaseDbOperator::Get(const std::string_view &key) {
+    DbResult BaseDbOperator::Get(const std::string_view &key) {
         std::string value;
         const auto result = db->Get(leveldb::ReadOptions(), key.data(), &value);
         return std::make_pair(result, value);
     }
 
-    BaseDbOperator::DbResultList BaseDbOperator::GetAll() {
+    DbResultList BaseDbOperator::GetAll() {
         DbKeyValue result{};
         auto iter = db->NewIterator(leveldb::ReadOptions());
         for (iter->SeekToFirst(); iter->Valid(); iter->Next()) {
@@ -53,6 +53,11 @@ namespace DbOperator {
         const auto status = iter->status();
         delete iter;
         return DbResultList{status, result};
+    }
+
+    DbResult BaseDbOperator::Delete(const std::string_view &key) {
+        const auto result = db->Delete(leveldb::WriteOptions(), key.data());
+        return std::make_pair(result, key);
     }
 
 }

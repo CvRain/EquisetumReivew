@@ -14,6 +14,13 @@ int main(int argc, char *argv[])
     auto& notice_operator = DbOperator::DbNoticeOperator::GetInstance();
     //const auto result = notice_operator.Create("Hello world!");
     //LOG_F(INFO, "Create notice result: %s", result.second.data());
+    const auto result = notice_operator.GetAll();
+    if(!result.first.ok()){
+        return -1;
+    }
+    for(const auto& it:result.second){
+        LOG_F(INFO, "Notice: %s- %s", it.first.data(), it.second.data());
+    }
 
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreationFailed,
         &app, []() { QCoreApplication::exit(-1); },

@@ -15,22 +15,23 @@
 
 namespace DbOperator {
     const std::filesystem::path default_db_directory = "leveldb";
+    using DbResult = std::pair<leveldb::Status, const std::string_view>;
+    using DbKeyValue = std::map<std::string_view, std::string_view>;
+    using DbResultList = std::pair<leveldb::Status, DbKeyValue>;
 
     class BaseDbOperator {
     public:
-        using DbResult = std::pair<leveldb::Status, const std::string_view>;
-        using DbKeyValue = std::map<std::string_view, std::string_view>;
-        using DbResultList = std::pair<leveldb::Status, DbKeyValue>;
-
         explicit BaseDbOperator(const std::filesystem::path &db_path);
 
-        void Delete();
+        void RemoveDb();
 
         virtual DbResult Put(const std::string_view &key, const std::string_view &value);
 
         virtual DbResult Get(const std::string_view &key);
 
         virtual DbResultList GetAll();
+
+        virtual DbResult Delete(const std::string_view &key);
 
         ~BaseDbOperator();
 
@@ -41,9 +42,10 @@ namespace DbOperator {
     class BaseOperator{
     public:
         virtual std::pair<leveldb::Status, const std::string_view> Create(const std::string_view& value) = 0;
-        virtual leveldb::Status Retrieve(const std::string_view& key) = 0;
+        virtual DbResult Retrieve(const std::string_view& key) = 0;
         virtual leveldb::Status Update(const std::string_view& key, const std::string_view& value) = 0;
         virtual leveldb::Status Delete(const std::string_view& key) = 0;
+        virtual DbResultList GetAll() = 0;
     };
 
 }

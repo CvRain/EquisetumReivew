@@ -20,16 +20,25 @@ namespace DbOperator{
         return std::make_pair(status.first, uuid);
     }
 
-    leveldb::Status DbNoticeOperator::Retrieve(const std::string_view &key) {
-        return leveldb::Status::OK();
+    DbResult DbNoticeOperator::Retrieve(const std::string_view &key) {
+        const auto result = db_operator.Get(key);
+        return result;
     }
 
     leveldb::Status DbNoticeOperator::Update(const std::string_view &key, const std::string_view &value) {
-        return leveldb::Status::OK();
+        const auto result = db_operator.Get(key);
+        return db_operator.Put(key, value).first;
+
     }
 
     leveldb::Status DbNoticeOperator::Delete(const std::string_view &key) {
-        return leveldb::Status::OK();
+        const auto result = db_operator.Delete(key);
+        return result.first;
+    }
+
+    DbResultList DbNoticeOperator::GetAll() {
+        const auto result = db_operator.GetAll();
+        return result;
     }
 
 

@@ -17,11 +17,13 @@ namespace DbOperator {
 
         std::pair<leveldb::Status, const std::string_view> Create(const std::string_view &value) override;
 
-        leveldb::Status Retrieve(const std::string_view &key) override;
+        DbResult Retrieve(const std::string_view &key) override;
 
         leveldb::Status Update(const std::string_view &key, const std::string_view &value) override;
 
         leveldb::Status Delete(const std::string_view &key) override;
+
+        DbResultList GetAll() override;
 
     private:
         explicit DbNoticeOperator();
