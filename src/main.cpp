@@ -12,9 +12,9 @@ int main(int argc, char *argv[])
     LOG_F(INFO,"QQmlApplicationEngine start");
 
     auto& notice_operator = DbOperator::DbNoticeOperator::GetInstance();
-    //const auto result = notice_operator.Create("Hello world!");
-    //LOG_F(INFO, "Create notice result: %s", result.second.data());
+    //notice_operator.Create("This is a test");
     const auto result = notice_operator.GetAll();
+
     if(!result.first.ok()){
         return -1;
     }

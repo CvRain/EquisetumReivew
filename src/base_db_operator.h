@@ -33,18 +33,24 @@ namespace DbOperator {
 
         virtual DbResult Delete(const std::string_view &key);
 
+        virtual std::string  CheckDbOperatorStatus(const leveldb::Status &status);
+
         ~BaseDbOperator();
 
     protected:
         leveldb::DB *db{};
     };
 
-    class BaseOperator{
+    class BaseOperator {
     public:
-        virtual std::pair<leveldb::Status, const std::string_view> Create(const std::string_view& value) = 0;
-        virtual DbResult Retrieve(const std::string_view& key) = 0;
-        virtual leveldb::Status Update(const std::string_view& key, const std::string_view& value) = 0;
-        virtual leveldb::Status Delete(const std::string_view& key) = 0;
+        virtual DbResult Create(const std::string_view &value) = 0;
+
+        virtual DbResult Retrieve(const std::string_view &key) = 0;
+
+        virtual DbResult Update(const std::string_view &key, const std::string_view &value) = 0;
+
+        virtual DbResult Delete(const std::string_view &key) = 0;
+
         virtual DbResultList GetAll() = 0;
     };
 

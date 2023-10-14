@@ -34,14 +34,16 @@ namespace DbOperator {
     }
 
     DbResult BaseDbOperator::Put(const std::string_view &key, const std::string_view &value) {
-        const auto result = db->Put(leveldb::WriteOptions(), key.data(), value.data());
-        return std::make_pair(result, value);
+        const auto status = db->Put(leveldb::WriteOptions(), key.data(), value.data());
+        CheckDbOperatorStatus(status);
+        return std::make_pair(status, value);
     }
 
     DbResult BaseDbOperator::Get(const std::string_view &key) {
         std::string value;
-        const auto result = db->Get(leveldb::ReadOptions(), key.data(), &value);
-        return std::make_pair(result, value);
+        const auto status = db->Get(leveldb::ReadOptions(), key.data(), &value);
+        CheckDbOperatorStatus(status);
+        return std::make_pair(status, value);
     }
 
     DbResultList BaseDbOperator::GetAll() {
@@ -52,12 +54,21 @@ namespace DbOperator {
         }
         const auto status = iter->status();
         delete iter;
+        CheckDbOperatorStatus(status);
         return DbResultList{status, result};
     }
 
     DbResult BaseDbOperator::Delete(const std::string_view &key) {
-        const auto result = db->Delete(leveldb::WriteOptions(), key.data());
-        return std::make_pair(result, key);
+        const auto status = db->Delete(leveldb::WriteOptions(), key.data());
+        CheckDbOperatorStatus(status);
+        return std::make_pair(status, key);
+    }
+
+    std::string BaseDbOperator::CheckDbOperatorStatus(const leveldb::Status &status) {
+        if(!status.ok()){
+            LOG_F(ERROR, "Error: %s", status.ToString().data());
+        }
+        return status.ToString();
     }
 
 }

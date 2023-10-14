@@ -6,6 +6,7 @@
 
 #include "base_db_operator.h"
 #include "id_generator.h"
+#include "json_maker.h"
 #include <filesystem>
 
 namespace DbOperator {
@@ -15,13 +16,13 @@ namespace DbOperator {
     public:
         static DbNoticeOperator& GetInstance();
 
-        std::pair<leveldb::Status, const std::string_view> Create(const std::string_view &value) override;
+        DbResult Create(const std::string_view &value) override;
 
         DbResult Retrieve(const std::string_view &key) override;
 
-        leveldb::Status Update(const std::string_view &key, const std::string_view &value) override;
+        DbResult Update(const std::string_view &key, const std::string_view &value) override;
 
-        leveldb::Status Delete(const std::string_view &key) override;
+        DbResult Delete(const std::string_view &key) override;
 
         DbResultList GetAll() override;
 

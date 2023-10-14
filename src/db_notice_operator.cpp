@@ -4,9 +4,9 @@
 
 #include "db_notice_operator.h"
 
-namespace DbOperator{
+namespace DbOperator {
 
-    DbNoticeOperator::DbNoticeOperator(): db_operator(default_db_directory/notice_db){
+    DbNoticeOperator::DbNoticeOperator() : db_operator(default_db_directory / notice_db) {
     }
 
     DbNoticeOperator &DbNoticeOperator::GetInstance() {
@@ -14,9 +14,16 @@ namespace DbOperator{
         return db_operator;
     }
 
-    std::pair<leveldb::Status, const std::string_view> DbNoticeOperator::Create(const std::string_view &value) {
+    DbResult DbNoticeOperator::Create(const std::string_view &value) {
         auto uuid = IdGenerator::GenerateObjectId();
-        const auto status = db_operator.Put(uuid, value);
+
+        JsonMaker maker{};
+        const auto result = maker.Append<std::string>("create", IdGenerator::GenerateRandomNumString())
+                .Append<std::string>("uuid", uuid)
+                .Append<std::string>("content", value.data())
+                .GetStdString();
+
+        const auto status = db_operator.Put(uuid, result);
         return std::make_pair(status.first, uuid);
     }
 
@@ -25,15 +32,15 @@ namespace DbOperator{
         return result;
     }
 
-    leveldb::Status DbNoticeOperator::Update(const std::string_view &key, const std::string_view &value) {
+    DbResult DbNoticeOperator::Update(const std::string_view &key, const std::string_view &value) {
         const auto result = db_operator.Get(key);
-        return db_operator.Put(key, value).first;
+        return result;
 
     }
 
-    leveldb::Status DbNoticeOperator::Delete(const std::string_view &key) {
+    DbResult DbNoticeOperator::Delete(const std::string_view &key) {
         const auto result = db_operator.Delete(key);
-        return result.first;
+        return result;
     }
 
     DbResultList DbNoticeOperator::GetAll() {

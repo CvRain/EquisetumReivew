@@ -3,8 +3,12 @@ cmake_minimum_required(VERSION 3.16)
 project(EquisetumReview VERSION 0.1 LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_AUTOMOC ON)
+set(CMAKE_AUTOUIC ON)
+set(CMAKE_AUTORCC ON)
+#set(CMAKE_TOOLCHAIN_FILE /mnt/Workspace/DevKit/vcpkg/scripts/buildsystems/vcpkg.cmake)
 
-find_package(Qt6 6.5 REQUIRED COMPONENTS Quick)
+find_package(Qt6 6 REQUIRED COMPONENTS Quick)
 find_package(jsoncpp CONFIG REQUIRED)
 find_package(leveldb CONFIG REQUIRED)
 find_package(loguru CONFIG REQUIRED)
@@ -18,8 +22,6 @@ set(QML_MODULE modules/Main.qml
         modules/SlideContext.qml
 )
 
-qt6_add_resources(QRC_FILES res/resource.qrc)
-
 set(SRC src/main.cpp
         src/json_maker.cpp
         src/json_maker.h
@@ -32,9 +34,16 @@ set(SRC src/main.cpp
         src/id_generator.cpp
         src/id_generator.h)
 
+
+set(QRC_FILES res/resource.qrc)
+
 qt_add_executable(appEquisetumReview
         ${SRC}
         ${QRC_FILES}
+)
+
+qt_add_resources(appEquisetumReview
+        FILES ${QRC_FILES}
 )
 
 qt_add_qml_module(appEquisetumReview
