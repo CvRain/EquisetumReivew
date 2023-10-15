@@ -6,12 +6,8 @@
 
 namespace DbOperator {
 
-    DbNoticeOperator::DbNoticeOperator() : db_operator(default_db_directory / notice_db) {
-    }
-
-    DbNoticeOperator &DbNoticeOperator::GetInstance() {
-        static auto db_operator = DbNoticeOperator();
-        return db_operator;
+    DbNoticeOperator::DbNoticeOperator()
+    : db_operator(default_db_directory / notice_db),  SingletonTemplate<DbNoticeOperator>(){
     }
 
     DbResult DbNoticeOperator::Create(const std::string_view &value) {

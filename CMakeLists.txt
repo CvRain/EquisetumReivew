@@ -32,7 +32,10 @@ set(SRC src/main.cpp
         src/db_todo_operator.cpp
         src/db_todo_operator.h
         src/id_generator.cpp
-        src/id_generator.h)
+        src/id_generator.h
+        src/notice_controller.cpp
+        src/notice_controller.h
+        src/singleton_template.h)
 
 
 set(QRC_FILES res/resource.qrc)

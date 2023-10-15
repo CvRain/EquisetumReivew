@@ -4,6 +4,7 @@
 
 #pragma once
 
+#include "singleton_template.h"
 #include <filesystem>
 #include <leveldb/db.h>
 #include <loguru/loguru.hpp>
@@ -33,7 +34,7 @@ namespace DbOperator {
 
         virtual DbResult Delete(const std::string_view &key);
 
-        virtual std::string  CheckDbOperatorStatus(const leveldb::Status &status);
+        virtual std::string CheckDbOperatorStatus(const leveldb::Status &status);
 
         ~BaseDbOperator();
 
@@ -43,6 +44,7 @@ namespace DbOperator {
 
     class BaseOperator {
     public:
+
         virtual DbResult Create(const std::string_view &value) = 0;
 
         virtual DbResult Retrieve(const std::string_view &key) = 0;
@@ -52,6 +54,11 @@ namespace DbOperator {
         virtual DbResult Delete(const std::string_view &key) = 0;
 
         virtual DbResultList GetAll() = 0;
+
+    protected:
+        BaseOperator() = default;
+
+        ~BaseOperator() = default;
     };
 
 }

@@ -4,6 +4,7 @@
 
 #pragma once
 
+#include "singleton_template.h"
 #include "base_db_operator.h"
 #include "id_generator.h"
 #include "json_maker.h"
@@ -12,9 +13,9 @@
 namespace DbOperator {
     const std::filesystem::path notice_db = "notice";
 
-    class DbNoticeOperator : public BaseOperator {
+    class DbNoticeOperator : public BaseOperator, public SingletonTemplate<DbNoticeOperator> {
     public:
-        static DbNoticeOperator& GetInstance();
+        explicit DbNoticeOperator();
 
         DbResult Create(const std::string_view &value) override;
 
@@ -27,13 +28,6 @@ namespace DbOperator {
         DbResultList GetAll() override;
 
     private:
-        explicit DbNoticeOperator();
-
-        ~DbNoticeOperator() = default;
-
-        DbNoticeOperator(const DbNoticeOperator &) = default;
-
-        DbNoticeOperator &operator=(const DbNoticeOperator &) = default;
 
         BaseDbOperator db_operator;
     };
